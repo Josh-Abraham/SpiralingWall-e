@@ -144,7 +144,7 @@ def spiralOrder(matrix, radius, xMin, yMin):
     itemsCollected = payload['itemsCollected']
     totalCount = payload['constants']['TOTAL_COUNT']
     scanRadius = payload['constants']['SCAN_RADIUS']
-    scanRadius = math.floor(radius/2)
+    scanRadius = math.floor(scanRadius/2)
     total = totalCount['ORGANIC'] + totalCount['RECYCLE'] + totalCount['GARBAGE']
     print(totalCount['ORGANIC'])
     print(totalCount)
@@ -161,20 +161,21 @@ def spiralOrder(matrix, radius, xMin, yMin):
     print(total)
     print(itemsCollected)
     print(itemsBin)
+    print(scanRadius)
     for _ in range(rows * columns):
         if (count == (radius * 2 + 1)):
             print(di)
             print (r, c)
-            if di == 0and r%scanRadius == 0:
+            if di == 0 and r%1 == 0:
                 print('Hitting if', di);
                 newone = scanAndClean(r, c, xMin, yMin, newone)
-            elif di == 2 and r%scanRadius == 1:
+            elif di == 2 and r%1 == 0:
                 print('Hitting if', di);
                 newone = scanAndClean(r, c, xMin, yMin, newone)
-            elif di == 1 and c%scanRadius == 1:
+            elif di == 1 and c%1 == 0:
                 print('Hitting if', di);
                 newone = scanAndClean(r, c, xMin, yMin, newone)
-            elif di == 3 and c%scanRadius == 1:
+            elif di == 3 and c%1 == 0:
                 print('Hitting if', di);
                 newone = scanAndClean(r, c, xMin, yMin, newone)
             count = 0
@@ -188,11 +189,11 @@ def spiralOrder(matrix, radius, xMin, yMin):
         count += 1
     itemsHeld = getinstance().json()['payload']['itemsHeld']
     itemsBin =  getinstance().json()['payload']['itemsBin']
-    while len(itemsHeld) != 0 or len(itemsBin) != 0:
-        checkBins(True)
-        itemsHeld = getinstance().json()['payload']['itemsHeld']
-        itemsBin =  getinstance().json()['payload']['itemsBin']
-    finish()
+    # while len(itemsHeld) != 0 or len(itemsBin) != 0:
+    #     checkBins(True)
+    #     itemsHeld = getinstance().json()['payload']['itemsHeld']
+    #     itemsBin =  getinstance().json()['payload']['itemsBin']
+    # finish()
     return newone
 
 def scanAndClean(r, c, xMin, yMin, newone):
